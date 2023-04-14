@@ -9,7 +9,6 @@ import conversationRoutes from "./routes/conversationRoutes.js"
 import messageRoutes from "./routes/messageRoutes.js"
 import cookieParser from "cookie-parser"
 import http from "http"
-import path from "path"
 import { Server } from "socket.io"
 
 
@@ -18,7 +17,7 @@ dotenv.config();
 connectDB();
 
 const app = express();
-const server = http.createServer(app)
+const server = http.createServer(app);
 
 
 
@@ -96,14 +95,6 @@ app.use('/api/conversations',conversationRoutes);
 app.use('/api/messages',messageRoutes);
 
 app.use(errHandler);
-
-
-const __dirname = path.resolve();
-app.use(express.static(path.join(__dirname, './client/build')));
-
-app.get('*', (req,res) => {
-    res.sendFile(path.join(__dirname,'./client/build/index.html'));
-})
 
 const port = process.env.PORT || 8080;
 
